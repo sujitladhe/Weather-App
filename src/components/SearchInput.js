@@ -1,13 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 
-export const SearchInput = ({ placeholder }) => {
+export const SearchInput = ({ placeholder, onSubmitText }) => {
+
+    const [newlocation, setNewlocation] = useState("");
+    const updateLocation = (l) => {
+        l? setNewlocation(l) : setNewlocation("Wardha")
+    }
     return (
         <View style={styles.container}>
       <TextInput 
       style={styles.textInput}
       placeholder={placeholder}
       placeholderTextColor={'white'}
+      onChangeText={(l)=>{updateLocation(l)}}
+      onEndEditing={()=>{onSubmitText(newlocation)}}
       />
     </View>
     )
@@ -17,7 +24,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'gray',
         height: 40,
-        width: 300,
         marginTop: 20,
         marginHorizontal: 20,
         paddingHorizontal: 10,
